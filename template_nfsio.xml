@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-06-08T08:24:02Z</date>
+    <date>2020-06-08T09:24:30Z</date>
     <groups>
         <group>
             <name>Templates/Modules</name>
@@ -9,11 +9,12 @@
     </groups>
     <templates>
         <template>
-            <template>Template NFS iostat</template>
-            <name>Template NFS iostat</name>
+            <template>Template Module NFS iostat</template>
+            <name>Template Module NFS iostat</name>
             <description>English version forked from http://zabbix.guru&#13;
 &#13;
-nfsiostat statistics for NFS client</description>
+nfsiostat statistics for NFS client&#13;
+add check for exists of NFSv4 mount point</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -24,6 +25,26 @@ nfsiostat statistics for NFS client</description>
                     <name>NFSiostat</name>
                 </application>
             </applications>
+            <items>
+                <item>
+                    <name>NFSv4 Mount point Exist</name>
+                    <key>nfsv4.mounted</key>
+                    <delay>5m</delay>
+                    <trends>120d</trends>
+                    <applications>
+                        <application>
+                            <name>NFSiostat</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}=1</expression>
+                            <name>NFSv4 mount point doesn't exist</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
             <discovery_rules>
                 <discovery_rule>
                     <name>NFSIO mount point discovery</name>
@@ -35,8 +56,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - bklog</name>
                             <key>nfsio[{#MOUNT_POINT},bklog]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>symmary length of the backlog queue</description>
                             <applications>
@@ -48,8 +69,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - op_s</name>
                             <key>nfsio[{#MOUNT_POINT},op_s]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>summary operations per second</description>
                             <applications>
@@ -61,8 +82,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - read_exe</name>
                             <key>nfsio[{#MOUNT_POINT},read_exe]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>duration until the RPC read request is completed (includes the RTT time)</description>
                             <applications>
@@ -74,8 +95,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - read_kB_op</name>
                             <key>nfsio[{#MOUNT_POINT},read_kB_op]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of kB read per each operation1</description>
                             <applications>
@@ -87,8 +108,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - read_kB_s</name>
                             <key>nfsio[{#MOUNT_POINT},read_kB_s]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of kB read per second</description>
                             <applications>
@@ -100,8 +121,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - read_ops_s</name>
                             <key>nfsio[{#MOUNT_POINT},read_ops_s]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of read operations per second</description>
                             <applications>
@@ -113,8 +134,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - read_retry</name>
                             <key>nfsio[{#MOUNT_POINT},read_retry]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of read retransmissions</description>
                             <applications>
@@ -126,8 +147,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - read_retry_perc</name>
                             <key>nfsio[{#MOUNT_POINT},read_retry_perc]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of read retransmissions in percent</description>
                             <applications>
@@ -139,8 +160,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - read_rtt</name>
                             <key>nfsio[{#MOUNT_POINT},read_rtt]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>duration read time to receives the replyclient (Round Travel Time)</description>
                             <applications>
@@ -152,8 +173,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - write_exe</name>
                             <key>nfsio[{#MOUNT_POINT},write_exe]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>duration until the RPC write request is completed (includes the RTT time)</description>
                             <applications>
@@ -165,8 +186,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - write_kB_op</name>
                             <key>nfsio[{#MOUNT_POINT},write_kB_op]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of kB write per each operation1</description>
                             <applications>
@@ -178,8 +199,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - write_kB_s</name>
                             <key>nfsio[{#MOUNT_POINT},write_kB_s]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of kB write per second</description>
                             <applications>
@@ -191,8 +212,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - write_ops_s</name>
                             <key>nfsio[{#MOUNT_POINT},write_ops_s]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of write operations per second</description>
                             <applications>
@@ -204,8 +225,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - write_retry</name>
                             <key>nfsio[{#MOUNT_POINT},write_retry]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of write retransmissions</description>
                             <applications>
@@ -217,8 +238,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - write_retry_perc</name>
                             <key>nfsio[{#MOUNT_POINT},write_retry_perc]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>number of write retransmissions in percent</description>
                             <applications>
@@ -230,8 +251,8 @@ nfsiostat statistics for NFS client</description>
                         <item_prototype>
                             <name>{#MOUNT_POINT} - write_rtt</name>
                             <key>nfsio[{#MOUNT_POINT},write_rtt]</key>
-                            <delay>60</delay>
-                            <history>30d</history>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
                             <value_type>FLOAT</value_type>
                             <description>duration write time to receives the replyclient (Round Travel Time)</description>
                             <applications>
@@ -248,7 +269,7 @@ nfsiostat statistics for NFS client</description>
                                 <graph_item>
                                     <color>1A7C11</color>
                                     <item>
-                                        <host>Template NFS iostat</host>
+                                        <host>Template Module NFS iostat</host>
                                         <key>nfsio[{#MOUNT_POINT},read_kB_s]</key>
                                     </item>
                                 </graph_item>
@@ -256,7 +277,7 @@ nfsiostat statistics for NFS client</description>
                                     <sortorder>1</sortorder>
                                     <color>F63100</color>
                                     <item>
-                                        <host>Template NFS iostat</host>
+                                        <host>Template Module NFS iostat</host>
                                         <key>nfsio[{#MOUNT_POINT},write_kB_s]</key>
                                     </item>
                                 </graph_item>
@@ -268,7 +289,7 @@ nfsiostat statistics for NFS client</description>
                                 <graph_item>
                                     <color>1A7C11</color>
                                     <item>
-                                        <host>Template NFS iostat</host>
+                                        <host>Template Module NFS iostat</host>
                                         <key>nfsio[{#MOUNT_POINT},read_ops_s]</key>
                                     </item>
                                 </graph_item>
@@ -276,7 +297,7 @@ nfsiostat statistics for NFS client</description>
                                     <sortorder>1</sortorder>
                                     <color>F63100</color>
                                     <item>
-                                        <host>Template NFS iostat</host>
+                                        <host>Template Module NFS iostat</host>
                                         <key>nfsio[{#MOUNT_POINT},write_ops_s]</key>
                                     </item>
                                 </graph_item>
@@ -288,7 +309,7 @@ nfsiostat statistics for NFS client</description>
                                 <graph_item>
                                     <color>1A7C11</color>
                                     <item>
-                                        <host>Template NFS iostat</host>
+                                        <host>Template Module NFS iostat</host>
                                         <key>nfsio[{#MOUNT_POINT},read_exe]</key>
                                     </item>
                                 </graph_item>
@@ -296,7 +317,7 @@ nfsiostat statistics for NFS client</description>
                                     <sortorder>1</sortorder>
                                     <color>F63100</color>
                                     <item>
-                                        <host>Template NFS iostat</host>
+                                        <host>Template Module NFS iostat</host>
                                         <key>nfsio[{#MOUNT_POINT},write_exe]</key>
                                     </item>
                                 </graph_item>
@@ -305,7 +326,7 @@ nfsiostat statistics for NFS client</description>
                                     <drawtype>DASHED_LINE</drawtype>
                                     <color>2774A4</color>
                                     <item>
-                                        <host>Template NFS iostat</host>
+                                        <host>Template Module NFS iostat</host>
                                         <key>nfsio[{#MOUNT_POINT},read_retry]</key>
                                     </item>
                                 </graph_item>
@@ -314,7 +335,7 @@ nfsiostat statistics for NFS client</description>
                                     <drawtype>DASHED_LINE</drawtype>
                                     <color>AA00AA</color>
                                     <item>
-                                        <host>Template NFS iostat</host>
+                                        <host>Template Module NFS iostat</host>
                                         <key>nfsio[{#MOUNT_POINT},write_retry]</key>
                                     </item>
                                 </graph_item>
