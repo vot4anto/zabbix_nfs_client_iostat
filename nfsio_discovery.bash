@@ -10,7 +10,9 @@
 #
 # ===========================================================
 
-array="$(findmnt -lo target -n -t nfs,nfs4)"
+#array="$(findmnt -lo target -n -t nfs,nfs4)"
+#find only nfsv4 
+array="$(findmnt -lo target -n -t nfs4)"
 
 comma=""
 printf '%s' '{"data":['
