@@ -1,7 +1,7 @@
 # Zabbix LLD Template for NFS client iostat statistics
 
 
-> Version 1.1 Forker - (20200608)
+> Version 1.0 (20200608)
 
 for Zabbix 4.4
 zabbix-agent must be installed on the monitored node
@@ -14,6 +14,7 @@ iostat packet MUST be installed
 * copy userparameter_nfsio.conf into /etc/zabbix/zabbix_agent.d
 * inport Template 
 * restart zabbix_agent
+* use the playbook ansible for automation of installation
 
 ## Files
 
@@ -30,3 +31,4 @@ iostat packet MUST be installed
 ## Version
 
 * 1.0 release from forked repo and playbook ansible for automation of use of template on monitored node
+* 1.1 add item for check existing of any nfsv4 mount point
