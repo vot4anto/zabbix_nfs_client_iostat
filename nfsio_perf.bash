@@ -1,10 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # ============================================================
-# Author: Dmitry Malinin
-# E.mail: dmitry@malinin.com
-# Blog: http://zabbix.guru
-# Filename: nfsio_discovery.sh
-# Modified: 2018-01-10
+# 
 # Description: Discovery NFS mountpoints.
 #
 # Parameters:
