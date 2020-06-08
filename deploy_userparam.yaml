@@ -1,0 +1,42 @@
+---
+# run with ansible-playbook -v -i host.linux  deploy_userparam.yaml --limit host/group
+#
+- hosts: all
+  become: yes
+
+  tasks:
+  - name: Check script folder exists
+    stat:
+     path: "{{ zbx_userpar_dir }}"
+    register: workdir
+ 
+  - name: "echo if directory already existed"
+    debug:
+      msg: "folder for userparameters files is already existed"
+    when: workdir.stat.exists
+ 
+  - name: "Ansible Create directory if not exists"
+    file:
+     path: "{{ zbx_userpar_dir }}"
+     state: directory
+     mode: 0755
+     group: root
+     owner: root
+    when: workdir.stat.exists == false
+
+  - name: Copy file with owner and permissions
+    copy:
+      src: "{{ item }}"
+      dest: "{{ zbx_userpar_dir }}"
+      owner: root
+      group: root
+      mode: '0644'
+      backup: yes
+      validate: ls %s
+    with_items:
+      - userparameter/userparameter_nfsio.conf
+
+  - name: Restart Zabbix agent on host
+    systemd:
+      state: restarted
+      name: zabbix-agent
