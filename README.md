@@ -1,16 +1,12 @@
 # Zabbix LLD Template for NFS client iostat statistics
 
-![Docker stuff](https://img.shields.io/badge/%F0%9F%90%B3-useful%20stuff-lightgray)
-![PizzaWare](https://img.shields.io/badge/%F0%9F%8D%95-PizzaWare-orange)
-![Tea powered](https://img.shields.io/badge/%F0%9F%8D%B5-tea%20powered-yellowgreen)
 
-> Version 1.1 - (20180113)
+> Version 1.1 Forker - (20200608)
 
-for Zabbix 3.x (Zabbix 2.x was not tested)
-
+for Zabbix 4.4
 zabbix-agent must be installed on the monitored node
-
 iostat packet MUST be installed
+
 
 ## Install
 
@@ -29,8 +25,8 @@ iostat packet MUST be installed
 ## References
 
 * yumaojun03/zabbix_monitor - https://github.com/yumaojun03/zabbix_monitor
+* pdacity/zabbix_nfs_client_iostat https://github.com/pdacity/zabbix_nfs_client_iostat
 
 ## Version
 
-* 1.0 - initial
-* 1.1 - add "Read / Write kB/s", "Read / Write op/s" and "RPC request time" graphs into Template
+* 1.0 release from forked repo and playbook ansible for automation of use of template on monitored node
