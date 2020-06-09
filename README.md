@@ -15,6 +15,8 @@ iostat packet MUST be installed
 * inport Template 
 * restart zabbix_agent
 * use the playbook ansible for automation of installation
+* use string for rcpinfo result for NFS server
+
 
 ## Files
 
@@ -32,3 +34,4 @@ iostat packet MUST be installed
 
 * 1.0 release from forked repo and playbook ansible for automation of use of template on monitored node
 * 1.1 add item for check existing of any nfsv4 mount point
+* 1.2 add script for check NFS server with rpcinfo and script to check the state of mountpoint on client
