@@ -34,8 +34,9 @@
       backup: yes
       validate: ls %s
     with_items:
-      - userparameter/userparameter_nfsio.conf
-
+      - userparameter_nfsio.conf
+      - userparameterrpc.conf
+      
   - name: Restart Zabbix agent on host
     systemd:
       state: restarted
