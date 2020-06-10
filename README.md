@@ -10,9 +10,9 @@ iostat packet MUST be installed
 
 ## Install
 
-* copy nfsio_perf.bash and nfsio_discovery.bash into /etc/zabbix/bin
-* copy userparameter_nfsio.conf into /etc/zabbix/zabbix_agent.d
-* inport Template 
+* copy all bash scripts into /etc/zabbix/bin
+* copy userparameter conf files into /etc/zabbix/zabbix_agent.d
+* import Template 
 * restart zabbix_agent
 * use the playbook ansible for automation of installation
 * use string for rcpinfo result for NFS server
@@ -35,3 +35,4 @@ iostat packet MUST be installed
 * 1.0 release from forked repo and playbook ansible for automation of use of template on monitored node
 * 1.1 add item for check existing of any nfsv4 mount point
 * 1.2 add script for check NFS server with rpcinfo and script to check the state of mountpoint on client
+* 1.3 add trigger prototipe on template for check if mount point NFS is in stale stare
