@@ -3,9 +3,13 @@
 #While [ -d /some/mountpoint ] can be used to detect a stale mountpoint, there is no similar alternative for rpcinfo
 #and hence use of read -t1 redirection is the best option. The output from the subshell can be muted with 2>&-. Here is an example from`
 # a $REPLY string having content is a success, not a failure. Thus, an empty $REPLY string means the mount is stale. Thus, the conditional should use -z, not -n:
+error_mnt=0
 mountpoint=$1
 read -t1 < <(stat -t "$mountpoint" 2>&-)
 if [ -z "$REPLY" ] ; then
-  echo "NFS mount stale. Check status..."
+  error_mnt=1
+  echo $error_mnt
+  #echo "NFS mount stale. Check status..."
   #umount -f -l "$mountpoint"
 fi
+echo $error_mnt
