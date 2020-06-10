@@ -35,5 +35,9 @@
       backup: yes
       validate: ls %s
     with_items:
-      - zabbix/nfsio_discovery.bash
-      - zabbix/nfsio_perf.bash
+      - nfsio_perf.bash
+      - nfsio_discovery.bash
+      - rpcinfo-monitor.bash
+      - rpcinfo-errcount.bash
+      - rpcinfo-errdetail.bash
+      - nfs_mnt_client.bash
