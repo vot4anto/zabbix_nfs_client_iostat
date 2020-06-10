@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-06-08T09:24:30Z</date>
+    <date>2020-06-10T15:23:52Z</date>
     <groups>
         <group>
             <name>Templates/Modules</name>
@@ -9,12 +9,13 @@
     </groups>
     <templates>
         <template>
-            <template>Template Module NFS iostat</template>
-            <name>Template Module NFS iostat</name>
+            <template>Template Module NFS</template>
+            <name>Template Module NFS</name>
             <description>English version forked from http://zabbix.guru&#13;
 &#13;
 nfsiostat statistics for NFS client&#13;
-add check for exists of NFSv4 mount point</description>
+check for exists of NFSv4 mount point &#13;
+and for NFSv4 mount point check if the mountpoint is stale</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -22,7 +23,7 @@ add check for exists of NFSv4 mount point</description>
             </groups>
             <applications>
                 <application>
-                    <name>NFSiostat</name>
+                    <name>NFS</name>
                 </application>
             </applications>
             <items>
@@ -30,10 +31,11 @@ add check for exists of NFSv4 mount point</description>
                     <name>NFSv4 Mount point Exist</name>
                     <key>nfsv4.mounted</key>
                     <delay>5m</delay>
+                    <history>60d</history>
                     <trends>120d</trends>
                     <applications>
                         <application>
-                            <name>NFSiostat</name>
+                            <name>NFS</name>
                         </application>
                     </applications>
                     <triggers>
@@ -43,6 +45,38 @@ add check for exists of NFSv4 mount point</description>
                             <priority>HIGH</priority>
                         </trigger>
                     </triggers>
+                </item>
+                <item>
+                    <name>NFSv4 RPC Error Count</name>
+                    <key>rpccount</key>
+                    <delay>5m</delay>
+                    <history>60d</history>
+                    <trends>120d</trends>
+                    <applications>
+                        <application>
+                            <name>NFS</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&lt;&gt;0</expression>
+                            <name>NFS server rpc error detected</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>NFSv4 RPC Error detail</name>
+                    <key>rpcdetail</key>
+                    <delay>5m</delay>
+                    <history>14d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <applications>
+                        <application>
+                            <name>NFS</name>
+                        </application>
+                    </applications>
                 </item>
             </items>
             <discovery_rules>
@@ -62,7 +96,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>symmary length of the backlog queue</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -75,7 +109,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>summary operations per second</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -88,7 +122,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>duration until the RPC read request is completed (includes the RTT time)</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -101,7 +135,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of kB read per each operation1</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -114,7 +148,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of kB read per second</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -127,7 +161,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of read operations per second</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -140,7 +174,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of read retransmissions</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -153,7 +187,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of read retransmissions in percent</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -166,7 +200,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>duration read time to receives the replyclient (Round Travel Time)</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -179,7 +213,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>duration until the RPC write request is completed (includes the RTT time)</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -192,7 +226,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of kB write per each operation1</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -205,7 +239,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of kB write per second</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -218,7 +252,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of write operations per second</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -231,7 +265,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of write retransmissions</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -244,7 +278,7 @@ add check for exists of NFSv4 mount point</description>
                             <description>number of write retransmissions in percent</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
                         </item_prototype>
@@ -257,9 +291,29 @@ add check for exists of NFSv4 mount point</description>
                             <description>duration write time to receives the replyclient (Round Travel Time)</description>
                             <applications>
                                 <application>
-                                    <name>NFSiostat</name>
+                                    <name>NFS</name>
                                 </application>
                             </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#MOUNT_POINT}</name>
+                            <key>nfsmnt[{#MOUNT_POINT}]</key>
+                            <delay>5m</delay>
+                            <trends>120d</trends>
+                            <value_type>FLOAT</value_type>
+                            <description>Item for check if Mount point is stale or not</description>
+                            <applications>
+                                <application>
+                                    <name>NFS</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>NFSv4 mount point  {#MOUNT_POINT} is stale. Check Status</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                     </item_prototypes>
                     <graph_prototypes>
@@ -269,7 +323,7 @@ add check for exists of NFSv4 mount point</description>
                                 <graph_item>
                                     <color>1A7C11</color>
                                     <item>
-                                        <host>Template Module NFS iostat</host>
+                                        <host>Template Module NFS</host>
                                         <key>nfsio[{#MOUNT_POINT},read_kB_s]</key>
                                     </item>
                                 </graph_item>
@@ -277,7 +331,7 @@ add check for exists of NFSv4 mount point</description>
                                     <sortorder>1</sortorder>
                                     <color>F63100</color>
                                     <item>
-                                        <host>Template Module NFS iostat</host>
+                                        <host>Template Module NFS</host>
                                         <key>nfsio[{#MOUNT_POINT},write_kB_s]</key>
                                     </item>
                                 </graph_item>
@@ -289,7 +343,7 @@ add check for exists of NFSv4 mount point</description>
                                 <graph_item>
                                     <color>1A7C11</color>
                                     <item>
-                                        <host>Template Module NFS iostat</host>
+                                        <host>Template Module NFS</host>
                                         <key>nfsio[{#MOUNT_POINT},read_ops_s]</key>
                                     </item>
                                 </graph_item>
@@ -297,7 +351,7 @@ add check for exists of NFSv4 mount point</description>
                                     <sortorder>1</sortorder>
                                     <color>F63100</color>
                                     <item>
-                                        <host>Template Module NFS iostat</host>
+                                        <host>Template Module NFS</host>
                                         <key>nfsio[{#MOUNT_POINT},write_ops_s]</key>
                                     </item>
                                 </graph_item>
@@ -309,7 +363,7 @@ add check for exists of NFSv4 mount point</description>
                                 <graph_item>
                                     <color>1A7C11</color>
                                     <item>
-                                        <host>Template Module NFS iostat</host>
+                                        <host>Template Module NFS</host>
                                         <key>nfsio[{#MOUNT_POINT},read_exe]</key>
                                     </item>
                                 </graph_item>
@@ -317,7 +371,7 @@ add check for exists of NFSv4 mount point</description>
                                     <sortorder>1</sortorder>
                                     <color>F63100</color>
                                     <item>
-                                        <host>Template Module NFS iostat</host>
+                                        <host>Template Module NFS</host>
                                         <key>nfsio[{#MOUNT_POINT},write_exe]</key>
                                     </item>
                                 </graph_item>
@@ -326,7 +380,7 @@ add check for exists of NFSv4 mount point</description>
                                     <drawtype>DASHED_LINE</drawtype>
                                     <color>2774A4</color>
                                     <item>
-                                        <host>Template Module NFS iostat</host>
+                                        <host>Template Module NFS</host>
                                         <key>nfsio[{#MOUNT_POINT},read_retry]</key>
                                     </item>
                                 </graph_item>
@@ -335,7 +389,7 @@ add check for exists of NFSv4 mount point</description>
                                     <drawtype>DASHED_LINE</drawtype>
                                     <color>AA00AA</color>
                                     <item>
-                                        <host>Template Module NFS iostat</host>
+                                        <host>Template Module NFS</host>
                                         <key>nfsio[{#MOUNT_POINT},write_retry]</key>
                                     </item>
                                 </graph_item>
