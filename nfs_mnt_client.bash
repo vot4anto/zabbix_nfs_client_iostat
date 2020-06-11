@@ -8,7 +8,6 @@ mountpoint=$1
 read -t1 < <(stat -t "$mountpoint" 2>&-)
 if [ -z "$REPLY" ] ; then
   error_mnt=1
-  echo $error_mnt
   #echo "NFS mount stale. Check status..."
   #umount -f -l "$mountpoint"
 fi
